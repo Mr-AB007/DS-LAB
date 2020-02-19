@@ -1,0 +1,115 @@
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+int TOP=0,MAXSTK=5;
+
+typedef struct link
+{
+    int info;
+    struct link *next;
+}stk;
+
+stk *top;
+
+void empty_stack()
+{
+    top=NULL;
+}
+
+void push(int item)
+{
+    if(TOP==MAXSTK)
+    {
+        cout<<"Overflow ";
+    }
+    else
+    {
+    stk *ptr=(stk*)malloc(sizeof(stk));
+    ptr->info=item;
+    if(top==NULL)
+    {
+        top=ptr;
+        ptr->next=NULL;
+    }
+    else
+    {
+        ptr->next=top;
+        top=ptr;
+    }
+    TOP++;
+    }
+}
+
+int pop()
+{
+    int a;
+    if(top==NULL)
+    {
+        cout<<endl<<"Underflow";
+        return 0;
+    }
+    else
+    {
+        stk *ptr=top;
+        a=ptr->info;
+        top=top->next;
+        free(ptr);
+        TOP--;
+
+    }
+    return a;
+}
+
+void disp()
+{
+    if(top==NULL)
+        cout<<"Empty";
+    else
+    {
+        stk *ptr=top;
+        cout<<endl<<"Stack : ";
+        while(ptr!=NULL)
+        {
+            cout<<ptr->info<<" ";
+            ptr=ptr->next;
+        }
+    }
+}
+int main()
+{
+    int a=0,item;
+
+    while(a!=4)
+    {
+        cout<<endl<<endl<<"1: POP "<<endl<<"2: PUSH"<<endl<<"3: VIEW"<<endl<<"4: EXIT";
+        cout<<endl<<endl<<"Enter choice : ";
+        cin>>a;
+        switch(a)
+        {
+            case 1:
+            {
+                int v=pop();
+                if(v!=0)
+                {
+                    cout<<endl<<"Deleted Value is : "<<v<<endl;
+                }
+                  break;
+            }
+
+            case 2:
+            {
+              cout<<endl<<"Enter the Value : ";
+              cin>>item;
+              push(item);
+                break;
+            }
+
+            case 3:
+            {
+                disp();
+            }
+        }
+    }
+    return 0;
+}
