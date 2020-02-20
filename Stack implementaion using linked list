@@ -2,7 +2,7 @@
 #include <cstdlib>
 using namespace std;
 
-int TOP=0,MAXSTK=5;
+int TOP=0;
 
 typedef struct link
 {
@@ -19,12 +19,6 @@ void empty_stack()
 
 void push(int item)
 {
-    if(TOP==MAXSTK)
-    {
-        cout<<"Overflow ";
-    }
-    else
-    {
     stk *ptr=(stk*)malloc(sizeof(stk));
     ptr->info=item;
     if(top==NULL)
@@ -38,7 +32,6 @@ void push(int item)
         top=ptr;
     }
     TOP++;
-    }
 }
 
 int pop()
